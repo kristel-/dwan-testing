@@ -35,7 +35,7 @@ class DWANApiTests(unittest.TestCase):
     def test_02_login_state(self):
         r = self.s.get(self.server_url+'api/authentication/principal')
         data = Xml2Json(r.text).result
-        self.user_id = data['principal'][1]['URI'].split('/')[7]
+        self.user_id = data['principal'][1]['xml:id']
         self.assertEqual(r.status_code, 200)
 
     ''' Place for the specific tests
