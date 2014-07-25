@@ -40,6 +40,36 @@ class DWANApiTests(unittest.TestCase):
 
     ''' Place for the specific tests
     '''
+
+    ''' Retrieve the annotated webpage
+    '''
+    def test_1_annotations(self):
+        r = requests.get(self.server_url+'api/annotations?link=Sagrada_Fam%C3%ADlia')
+        self.assertEqual(r.status_code, 401)
+
+    def test_2_annotations(self):
+        r = requests.get(self.server_url+'api/annotations?link=Antoni_Gaud%C3%AD ')
+        self.assertEqual(r.status_code, 401)
+
+    def test_3_annotations(self):
+        r = requests.get(self.server_url+'api/annotations?after=2014-02-04 15:57:58.046908&before=2014-04-06 10:08:16.213186')
+        self.assertEqual(r.status_code, 401)
+
+
+    def test_4_annotations(self):
+        r = requests.get(self.server_url+'api/annotations/00000000-0000-0000-0000-000000000022 ')
+        self.assertEqual(r.status_code, 400)
+
+
+    def test_5_annotations(self):
+        r = requests.get(self.server_url+'api/annotations/00000000-0000-0000-0000-000000000022/targets ')
+        self.assertEqual(r.status_code, 400)
+
+    def test_6_annotations(self):
+        r = requests.get(self.server_url+'api/annotations/00000000-0000-0000-0000-000000000022/permissions')
+        self.assertEqual(r.status_code, 401)
+
+
         
     ''' Tests for LOGOUT
     '''
@@ -61,3 +91,5 @@ class DWANApiTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
